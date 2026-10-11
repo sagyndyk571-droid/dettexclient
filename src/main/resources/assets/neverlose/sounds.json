@@ -1,0 +1,112 @@
+{
+  "kolokolnia_kill": {
+    "sounds": [
+      "neverlose:kolokolnia_kill"
+    ]
+  },
+  "moan1": {
+    "sounds": [
+      "neverlose:moan1"
+    ]
+  },
+  "moan2": {
+    "sounds": [
+      "neverlose:moan2"
+    ]
+  },
+  "moan3": {
+    "sounds": [
+      "neverlose:moan3"
+    ]
+  },
+  "moan4": {
+    "sounds": [
+      "neverlose:moan4"
+    ]
+  },
+  "module_disable": {
+    "sounds": [
+      "neverlose:module_disable"
+    ]
+  },
+  "module_enable": {
+    "sounds": [
+      "neverlose:module_enable"
+    ]
+  },
+  "off": {
+    "sounds": [
+      "neverlose:off"
+    ]
+  },
+  "on": {
+    "sounds": [
+      "neverlose:on"
+    ]
+  },
+  "crime": {
+    "sounds": [
+      "neverlose:crime"
+    ]
+  },
+  "metallic": {
+    "sounds": [
+      "neverlose:metallic"
+    ]
+  },
+  "welcome": {
+    "sounds": [
+      "neverlose:welcome"
+    ]
+  },
+  "clickgui_clack": {
+    "sounds": [
+      "neverlose:clickgui/clack"
+    ]
+  },
+  "clickgui_function_off": {
+    "sounds": [
+      "neverlose:clickgui/function_off"
+    ]
+  },
+  "clickgui_function_on": {
+    "sounds": [
+      "neverlose:clickgui/function_on"
+    ]
+  },
+  "clickgui_close": {
+    "sounds": [
+      "neverlose:clickgui/guiclose"
+    ]
+  },
+  "clickgui_open": {
+    "sounds": [
+      "neverlose:clickgui/guiopen"
+    ]
+  },
+  "clickgui_module_close": {
+    "sounds": [
+      "neverlose:clickgui/moduleclose"
+    ]
+  },
+  "clickgui_module_open": {
+    "sounds": [
+      "neverlose:clickgui/moduleopen"
+    ]
+  },
+  "clickgui_select": {
+    "sounds": [
+      "neverlose:clickgui/select"
+    ]
+  },
+  "clickgui_slider": {
+    "sounds": [
+      "neverlose:clickgui/slider"
+    ]
+  },
+  "clickgui_title": {
+    "sounds": [
+      "neverlose:clickgui/title"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+	"required": true,
+	"package": "neverlose.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+      "GameRendererMixin",
+      "MinecraftClientMixin",
+      "ItemStackMixin",
+      "CameraMixin",
+      "LivingEntityMixin",
+      "BlockRenderManagerMixin",
+      "HandRenderTypeMixin",
+      "HeldItemRendererMixin",
+      "ItemRendererMixin",
+      "JavaMethodMixin",
+      "UseDurationMixin",
+      "UsingItemMixin",
+      "HangingSignMixin",
+      "ItemRenderStateMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

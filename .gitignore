@@ -1,0 +1,29 @@
+# Gradle
+.gradle/
+build/
+out/
+
+# Minecraft run directory (генерируется автоматически)
+run/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Логи и краш-репорты
+hs_err_pid*.log
+replay_pid*.log
+*.log
+build_log.txt
+*.hprof
+†.html
+
+# Тесты
+.jqwik-database
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
