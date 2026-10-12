@@ -43,7 +43,7 @@ public class Aura extends ModuleStructure {
     }
 
     public final SelectSetting mode = new SelectSetting("Режим наводки", "Select aim mode")
-            .value("Matrix", "ReallyWorld", "FunTime Snap", "FunTime Polar", "Snap", "SpookyTime", "Neuro", "Shard", "Grim AI")
+            .value("Matrix", "ReallyWorld", "FunTime Snap", "FunTime Polar", "Snap", "SpookyTime", "Neuro", "Shard", "Grim AI", "Apex", "Apextime")
             .selected("Matrix");
 
     public final SelectSetting neuroProfile = new SelectSetting("Нейро-Профиль", "Select neuro profile")
@@ -74,7 +74,7 @@ public class Aura extends ModuleStructure {
 
     @Getter
     private final SelectSetting resetSprintMode = new SelectSetting("Сброс спринта", "Reset sprint mode")
-            .value("Grim", "Отключен", "Легитный", "Пакетный")
+            .value("Grim", "Мультисерверный", "Отключен", "Легитный", "Пакетный", "Быстрый")
             .selected("Grim");
 
     @Getter
@@ -124,6 +124,8 @@ public class Aura extends ModuleStructure {
     private final NeuroAngle neuroAngle = new NeuroAngle();
     private final ShardAngle shardAngle = new ShardAngle();
     private final GrimAngle grimAngle = new GrimAngle();
+    private final ApexAngle apexAngle = new ApexAngle();
+    private final ApextimeAngle apextimeAngle = new ApextimeAngle();
     private final LinearConstructor linearAngle = new LinearConstructor();
 
     @Override
@@ -282,7 +284,7 @@ public class Aura extends ModuleStructure {
                 }
             }
 
-            case "Matrix", "ReallyWorld", "FunTime Polar", "SpookyTime", "Neuro", "Shard", "Grim AI" -> {
+            case "Matrix", "ReallyWorld", "FunTime Polar", "SpookyTime", "Neuro", "Shard", "Grim AI", "Apex", "Apextime" -> {
                 controller.rotateTo(rotation, target, 1, rotationConfig, TaskPriority.HIGH_IMPORTANCE_1, this);
             }
 
@@ -307,6 +309,13 @@ public class Aura extends ModuleStructure {
 
         if (target == null || !target.isAlive())
             return;
+
+        if (resetSprintMode != null && resetSprintMode.isSelected("Быстрый")
+                && StrikeManager.cancelSprintTick(target)) {
+            event.setSprinting(false);
+            event.setDirectionalLow(false, false, false, false);
+            return;
+        }
 
         boolean w = mc.options.forwardKey.isPressed();
         boolean s = mc.options.backKey.isPressed();
@@ -441,6 +450,10 @@ public class Aura extends ModuleStructure {
         return targetSelector.getCurrentTarget();
     }
 
+    public SliderSettings getLookRange() {
+        return lookrange;
+    }
+
     public RotateConstructor getSmoothMode() {
         if (mc.player.isGliding() && ElytraTarget.getInstance() != null && ElytraTarget.getInstance().isState()) {
             return new LinearConstructor();
@@ -458,6 +471,8 @@ public class Aura extends ModuleStructure {
             case "Neuro" -> neuroAngle;
             case "Shard" -> shardAngle;
             case "Grim AI" -> grimAngle;
+            case "Apex" -> apexAngle;
+            case "Apextime" -> apextimeAngle;
             default -> linearAngle;
         };
     }

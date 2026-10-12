@@ -69,11 +69,11 @@ public class Hud extends ModuleStructure {
             .setValue(8.0f)
             .visible(() -> hudBlur.isValue());
 
-    public BooleanSetting showBps = new BooleanSetting("Show BPS", "РџРѕРєР°Р·С‹РІР°С‚СЊ Р±Р»РѕРєРё РІ СЃРµРєСѓРЅРґСѓ")
+    public BooleanSetting showBps = new BooleanSetting("Show BPS", "Показывать блоки в секунду")
             .setValue(true)
             .visible(() -> interfaceSettings.isSelected("Info"));
 
-    public BooleanSetting showTps = new BooleanSetting("Show TPS", "РџРѕРєР°Р·С‹РІР°С‚СЊ TPS РІ Watermark")
+    public BooleanSetting showTps = new BooleanSetting("Show TPS", "Показывать TPS в Watermark")
             .setValue(true)
             .visible(() -> interfaceSettings.isSelected("Watermark"));
 

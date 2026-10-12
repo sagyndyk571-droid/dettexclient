@@ -223,7 +223,7 @@ public class CosmeticModel {
         if (idx <= 0) return null;
         return switch (catalogId.substring(0, idx)) {
             case "figura" -> "Figura";
-            case "user" -> "РЎРІРѕСЏ";
+            case "user" -> "Своя";
             case "builtin" -> null;
             default -> null;
         };

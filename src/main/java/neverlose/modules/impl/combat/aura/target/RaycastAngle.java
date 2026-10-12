@@ -95,8 +95,8 @@ public class RaycastAngle implements IMinecraft {
         boolean isMatrixMode = Aura.getInstance().mode.isSelected("Matrix");
         boolean isReallyWorldMode = Aura.getInstance().mode.isSelected("ReallyWorld") || Network.isReallyWorld();
         boolean isGrimMode = Aura.getInstance().mode.isSelected("Grim AI");
-        float expansion = isGrimMode ? 0.015f : isReallyWorldMode ? 0.06f : isMatrixMode ? 0.12f : 0.15f;
-        double effectiveRange = isGrimMode ? Math.min(range, 3.0D) - 0.10D : range;
+        float expansion = isGrimMode ? 0.02f : isReallyWorldMode ? 0.06f : isMatrixMode ? 0.12f : 0.15f;
+        double effectiveRange = isGrimMode ? Math.min(range, 3.0D) - 0.08D : range;
         Box expandedBox = box.expand(expansion);
         return expandedBox.contains(cameraVec)
                 || expandedBox.raycast(cameraVec, cameraVec.add(clientVec.multiply(effectiveRange))).isPresent();

@@ -9,6 +9,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.EntityPose;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
@@ -57,6 +58,7 @@ public class StrikeManager implements IMinecraft {
     private final StopWatch shieldWatch = new StopWatch();
     private final StopWatch matrixWallWatch = new StopWatch();
     private final StopWatch sprintResetWatch = new StopWatch();
+    private static final StopWatch lastAttackWatch = new StopWatch();
 
     private int count = 0;
     private int ticksOnBlock = 0;
@@ -514,6 +516,38 @@ public class StrikeManager implements IMinecraft {
         mc.getNetworkHandler().sendPacket(new ClientCommandC2SPacket(mc.player, mode));
     }
 
+    public static long getMsCooldown() {
+        if (mc.player == null) {
+            return 450L;
+        }
+        double attackSpeed = mc.player.getAttributeValue(EntityAttributes.ATTACK_SPEED);
+        long msCooldown = (long) (1.0 / attackSpeed * 1000.0 * (1.0 - Math.min(0.2, 1.0)));
+        if (attackSpeed == 4.0 || attackSpeed == 4.4000000059604645 || attackSpeed == 4.800000011920929) {
+            msCooldown = 450L;
+        }
+        return Math.max(msCooldown, 450L);
+    }
+
+    public static boolean msCooldownReached(long msOffset) {
+        return lastAttackWatch.elapsedTime() >= getMsCooldown() + msOffset;
+    }
+
+    public static boolean cancelSprintTick(LivingEntity targetIn) {
+        if (mc.player == null || targetIn == null) {
+            return false;
+        }
+        if (!msCooldownReached(-50L)) {
+            return false;
+        }
+        if (mc.player.isOnGround()) {
+            return false;
+        }
+        if (mc.player.isSubmergedInWater()) {
+            return false;
+        }
+        return mc.player.getVelocity().y <= 0.0030162615090425808;
+    }
+
     private boolean canCritNow() {
         Aura aura = Aura.getInstance();
         boolean checkCritEnabled = aura.getCheckCrit().isValue();
@@ -717,6 +751,7 @@ public class StrikeManager implements IMinecraft {
     private void executeAttack(StrikerConstructor.AttackPerpetratorConfigurable config) {
         if (tryBreakShield(config)) {
             attackTimer.reset();
+            lastAttackWatch.reset();
             count++;
             return;
         }
@@ -725,6 +760,7 @@ public class StrikeManager implements IMinecraft {
         mc.interactionManager.attackEntity(mc.player, config.getTarget());
         mc.player.swingHand(Hand.MAIN_HAND);
         attackTimer.reset();
+        lastAttackWatch.reset();
         count++;
     }
 
